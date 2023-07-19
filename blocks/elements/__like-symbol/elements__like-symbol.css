@@ -1,0 +1,7 @@
+.elements__like-symbol {
+    cursor: pointer;
+    transition: 0.5s all;
+}
+.elements__like-symbol:hover {
+    opacity: .6;
+}

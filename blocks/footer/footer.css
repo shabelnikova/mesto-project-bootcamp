@@ -1,0 +1,15 @@
+.footer {
+    font-family: Inter, sans-serif;
+    padding: 68px 200px 0;
+}
+
+@media(max-width: 980px) {
+    .footer {
+        padding: 68px 100px 0;
+    }
+}
+@media(max-width: 780px) {
+    .footer {
+        padding: 48px 19px 0;
+    }
+}

@@ -1,0 +1,12 @@
+.profile__add-button {
+    transition: .5s all;
+    cursor: pointer;
+}
+.profile__add-button:hover {
+    opacity: .6;
+}
+@media (max-width: 619px) {
+    .profile__add-button {
+        display: none;
+    }
+}

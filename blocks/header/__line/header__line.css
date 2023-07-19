@@ -1,0 +1,9 @@
+.header__line {
+    height: 37px;
+    border-bottom: 1px solid #545454;
+}
+@media(max-width: 619px) {
+    .header__line {
+        height: 27px;
+    }
+}

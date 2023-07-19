@@ -1,0 +1,16 @@
+.profile {
+    padding: 40px 0 51px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: Inter, sans-serif;
+    box-sizing: border-box;
+}
+@media (max-width: 619px) {
+    .profile {
+        flex-direction: column;
+        padding-bottom: 36px;
+        padding-top: 42px;
+
+    }
+}
