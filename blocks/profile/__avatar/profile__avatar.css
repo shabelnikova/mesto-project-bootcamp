@@ -1,7 +1,8 @@
 .profile__avatar {
     border-radius: 50%;
+    object-fit: cover;
 }
-@media (max-width: 619px) {
+@media (max-width: 750px) {
     .profile__avatar {
         margin-bottom: 28px;
     }

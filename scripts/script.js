@@ -3,8 +3,8 @@ const closeBtn = document.querySelector('.popup__closing');
 const popupSection = document.querySelector('.popup');
 
 addBtn.addEventListener('click', () => {
-  popupSection.style.display = 'block';
+  popupSection.classList.add('popup_opened');
 });
 closeBtn.addEventListener('click', () => {
-  popupSection.style.display = 'none';
+  popupSection.classList.remove('popup_opened');
 });

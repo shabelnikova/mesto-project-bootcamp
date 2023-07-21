@@ -1,0 +1,9 @@
+.card__like-symbol {
+    cursor: pointer;
+    transition: 0.5s all;
+    border: none;
+    background-color: #FFF;
+}
+.card__like-symbol:hover {
+    opacity: .5;
+}

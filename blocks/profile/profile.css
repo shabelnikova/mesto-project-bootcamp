@@ -6,7 +6,7 @@
     font-family: Inter, sans-serif;
     box-sizing: border-box;
 }
-@media (max-width: 619px) {
+@media (max-width: 750px) {
     .profile {
         flex-direction: column;
         padding-bottom: 36px;

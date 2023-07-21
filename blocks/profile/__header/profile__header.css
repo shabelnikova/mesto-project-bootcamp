@@ -8,16 +8,17 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    max-width: 310px;
 }
 @media(max-width: 1060px) {
     .profile__header {
         font-size: 32px;
     }
 }
-@media(max-width: 619px) {
+@media(max-width: 750px) {
     .profile__header {
         font-size: 27px;
         margin-bottom: 9px;
-        margin-left: 27px;
+        max-width: 250px;
     }
 }

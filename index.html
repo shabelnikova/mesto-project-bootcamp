@@ -6,85 +6,83 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Mesto</title>
-  <link rel="stylesheet" href="./vendor/normalize.css">
   <link rel="stylesheet" href="./pages/index.css">
 </head>
 <body class="root">
 <div class="page">
   <header class="header">
     <img class="header__logo" src="./images/logo.svg" alt="Логотип проекта">
-    <div class="header__line"></div>
   </header>
   <main class="content">
     <section class="profile">
       <div class="profile__wrapper">
-        <img src="./images/profile_img.jpg" alt="Лицо исследователя Жака Кусто" class="profile__avatar">
-        <div class="profile__header-wrapper">
-          <h1 class="profile__header">Жак-Ив&nbsp;Кусто<img src="./images/edit_button.svg" alt="Кнопка редактирования профиля" class="profile__edit-button"></h1>
+        <img src="./images/profile_img.jpg" alt="Аватар пользователя" class="profile__avatar">
+        <div class="profile__input-wrapper">
+          <div class="profile__header-wrapper">
+            <h1 class="profile__header">Жак-Ив&nbsp;Кусто</h1>
+            <button type="button" class="profile__edit-button"><img class="profile__icon-edit" src="./images/edit_button.svg" alt="Кнопка редактирования профиля"></button>
+          </div>
           <p class="profile__description">Исследователь океана</p>
         </div>
       </div>
-      <img src="./images/add_button.svg" alt="Кнопка добавления" class="profile__add-button">
-      <div class="profile__add-button-mobile">
-        <img src="./images/plus.svg" alt="Кнопка добавления" class="profile__plus">
-      </div>
+      <button type="button" class="profile__add-button"><img src="./images/plus.svg" alt="Кнопка добавления"></button>
     </section>
     <section class="elements">
-      <div class="elements__card">
-        <img src="./images/karachaevsk.jpg" alt="Вид на церковь в горах" class="elements__image">
-        <div class="elements__description">
-          <h2 class="elements__header">Карачаевск</h2>
-          <img src="./images/group.svg" alt="Кнопка лайка" class="elements__like-symbol">
+      <article class="card">
+        <img src="./images/karachaevsk.jpg" alt="Вид на церковь в горах" class="card__image">
+        <div class="card__description">
+          <h2 class="card__header">Карачаевск</h2>
+          <button type="button" class="card__like-symbol"><img src="./images/group.svg" alt="Кнопка лайка"></button>
         </div>
-      </div>
-      <div class="elements__card">
-        <img src="./images/elbrus.jpg" alt="Гора Эльбрус на закате" class="elements__image">
-        <div class="elements__description">
-          <h2 class="elements__header">Гора Эльбрус</h2>
-          <img src="./images/group.svg" alt="Кнопка лайка" class="elements__like-symbol">
+      </article>
+      <article class="card">
+        <img src="./images/elbrus.jpg" alt="Гора Эльбрус на закате" class="card__image">
+        <div class="card__description">
+          <h2 class="card__header">Гора Эльбрус</h2>
+          <button type="button" class="card__like-symbol"><img src="./images/group.svg" alt="Кнопка лайка"></button>
         </div>
-      </div>
-      <div class="elements__card">
-        <img src="./images/dombai.jpg" alt="Домбайские горы" class="elements__image">
-        <div class="elements__description">
-          <h2 class="elements__header">Домбай</h2>
-          <img src="./images/group.svg" alt="Кнопка лайка" class="elements__like-symbol">
+      </article>
+      <article class="card">
+        <img src="./images/dombai.jpg" alt="Домбайские горы" class="card__image">
+        <div class="card__description">
+          <h2 class="card__header">Домбай</h2>
+          <button type="button" class="card__like-symbol"><img src="./images/group.svg" alt="Кнопка лайка"></button>
         </div>
-      </div>
-      <div class="elements__card">
-        <img src="./images/elbrus.jpg" alt="Гора Эльбрус на закате" class="elements__image">
-        <div class="elements__description">
-          <h2 class="elements__header">Гора Эльбрус</h2>
-          <img src="./images/group.svg" alt="Кнопка лайка" class="elements__like-symbol">
+      </article>
+      <article class="card">
+        <img src="./images/elbrus.jpg" alt="Гора Эльбрус на закате" class="card__image">
+        <div class="card__description">
+          <h2 class="card__header">Гора Эльбрус</h2>
+          <button type="button" class="card__like-symbol"><img src="./images/group.svg" alt="Кнопка лайка"></button>
         </div>
-      </div>
-      <div class="elements__card">
-        <img src="./images/dombai.jpg" alt="Домбайские горы" class="elements__image">
-        <div class="elements__description">
-          <h2 class="elements__header">Домбай</h2>
-          <img src="./images/group.svg" alt="Кнопка лайка" class="elements__like-symbol">
+      </article>
+      <article class="card">
+        <img src="./images/dombai.jpg" alt="Домбайские горы" class="card__image">
+        <div class="card__description">
+          <h2 class="card__header">Домбай</h2>
+          <button type="button" class="card__like-symbol"><img src="./images/group.svg" alt="Кнопка лайка"></button>
         </div>
-      </div>
-      <div class="elements__card">
-        <img src="./images/karachaevsk.jpg" alt="Вид на церковь в горах" class="elements__image">
-        <div class="elements__description">
-          <h2 class="elements__header">Карачаево-Черкесск</h2>
-          <img src="./images/group.svg" alt="Кнопка лайка" class="elements__like-symbol">
+      </article>
+      <article class="card">
+        <img src="./images/karachaevsk.jpg" alt="Вид на церковь в горах" class="card__image">
+        <div class="card__description">
+          <h2 class="card__header">Карачаево-Черкесск</h2>
+          <button type="button" class="card__like-symbol"><img src="./images/group.svg" alt="Кнопка лайка"></button>
         </div>
-      </div>
+      </article>
     </section>
   </main>
-  <section class="popup">
+  <div class="popup">
     <div class="popup__container">
-      <img class="popup__closing" src="./images/close_icon.svg" alt="закрыть окно">
-      <form action="#" class="form">
+      <button type="button" class="popup__closing"><img class="popup__close-icon" src="./images/close_icon.svg" alt="закрыть окно"></button>
+      <form action="#" class="form" name="form">
         <h2 class="form__heading">Редактировать профиль</h2>
-        <input class="form__item" type="text" placeholder="Введите имя" name="name">
-        <input class="form__item" type="text" placeholder="Расскажите о себе" name="description">
-        <button class="form__button">Сохранить</button>
+        <input class="form__item" type="text" name="name" placeholder="Введите имя" required>
+        <input class="form__item" type="text" name="description" placeholder="Расскажите о себе" required>
+        <button type="submit" class="form__button">Сохранить</button>
       </form>
     </div>
-  </section>
+  </div>
   <footer class="footer">
     <p class="footer__copyright">© 2020 Mesto Russia</p>
   </footer>
