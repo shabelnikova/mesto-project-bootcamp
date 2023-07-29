@@ -1,8 +1,10 @@
 .card__like-symbol {
     cursor: pointer;
     transition: 0.5s all;
+    width: 26px;
+    height: 19px;
     border: none;
-    background-color: #FFF;
+    background: #FFF url("../../../images/group.svg")no-repeat  center center;
 }
 .card__like-symbol:hover {
     opacity: .5;
