@@ -4,26 +4,20 @@ const openPopup = (modalName) => {
 const closePopup = (modalName) => {
   modalName.classList.remove('popup_opened');
 }
-editCloseBtn.addEventListener('click', () => {
-  closePopup(popupBlockEdit);
+addBtn.addEventListener('click', () => {
+  openPopup(popupBlockAdd);
 });
-profileBlock.addEventListener('click', (e) => {
-  if(e.target.className === 'profile__icon-edit')
-    openPopup(popupBlockEdit, formEdit);
-  if(e.target.className === 'profile__add-button')
-    openPopup(popupBlockAdd, formAdd);
+editBtn.addEventListener('click', () => {
+  openPopup(popupBlockEdit);
+  nameInput.value = name.textContent;
+  jobInput.value = job.textContent;
 });
 formEdit.addEventListener('submit', (e) => {
   e.preventDefault();
   name.textContent = nameInput.value;
   job.textContent = jobInput.value;
-  formEdit.reset();
   closePopup(popupBlockEdit);
 });
-addCloseBtn.addEventListener('click', () => {
-  closePopup(popupBlockAdd);
-});
-
 formAdd.addEventListener('submit', (e) => {
   e.preventDefault();
   elementsSection.prepend(createCard(placeInput.value, imgInput.value));
@@ -34,14 +28,11 @@ const createCard = (name, link) => {
   const card = cardTemplate.cloneNode(true);
   const cardImage = card.querySelector('.card__image');
   cardImage.src = link;
+  cardImage.alt = name;
   cardImage.addEventListener('click', () => {
-    console.log('hello')
     openPopup(galleryPopup);
     galleryPopupImg.src = link;
     galleryPopupImgDescription.textContent = name;
-    galleryPopupClosing.addEventListener('click', () => {
-      closePopup(galleryPopup);
-    })
   })
   card.querySelector('.card__header').textContent = name;
   card.querySelector('.card__delete-symbol').addEventListener('click', () => {
@@ -58,4 +49,8 @@ renderCards = () => {
     elementsSection.append(createCard(item.name, item.link));
   })
 }
+closeButtons.forEach((item) => {
+  const popup = item.closest('.popup');
+  item.addEventListener('click', () => closePopup(popup));
+})
 renderCards();
