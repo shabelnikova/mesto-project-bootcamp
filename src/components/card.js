@@ -22,6 +22,7 @@ export const createCard = (name, link) => {
   cardImage.addEventListener('click', () => {
     openPopup(galleryPopup);
     galleryPopupImg.src = link;
+    galleryPopupImg.alt = name;
     galleryPopupImgDescription.textContent = name;
   })
   card.querySelector('.card__header').textContent = name;

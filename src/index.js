@@ -13,10 +13,17 @@ import {
   popupBlockEdit, popups, name
 } from "./components/constants";
 
-
+enableValidation({
+  formSelector: '.form',
+  inputSelector: '.form__item',
+  submitButtonSelector: '.form__button',
+  inactiveButtonClass: 'form__button_inactive',
+  inputErrorClass: 'form__item_type_error',
+  errorClass: 'form__item_error'
+});
 
 renderCards();
-enableValidation();
+// enableValidation();
 addBtn.addEventListener('click', () => {
   openPopup(popupBlockAdd);
 });
@@ -30,13 +37,15 @@ formEdit.addEventListener('submit', (e) => {
   name.textContent = nameInput.value;
   job.textContent = jobInput.value;
   closePopup(popupBlockEdit);
-  e.submitter.classList.add('form__button_inactive')
+  e.submitter.classList.add('form__button_inactive');
+  e.submitter.setAttribute('disabled', '');
 });
 formAdd.addEventListener('submit', (e) => {
   e.preventDefault();
   elementsSection.prepend(createCard(placeInput.value, imgInput.value));
   formAdd.reset();
-  e.submitter.classList.add('form__button_inactive')
+  e.submitter.classList.add('form__button_inactive');
+  e.submitter.setAttribute('disabled', '');
   closePopup(popupBlockAdd);
 });
 popups.forEach(item => {
