@@ -1,0 +1,13 @@
+.profile__image-wrapper {
+    max-width: 120px;
+    width: 120px;
+    max-height: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+}
+.profile__image-wrapper:hover {
+    z-index: -2;
+
+}

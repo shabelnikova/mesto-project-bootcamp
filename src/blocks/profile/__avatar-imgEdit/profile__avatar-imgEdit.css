@@ -1,0 +1,21 @@
+.profile__avatar-imgEdit {
+    max-width: 120px;
+    width: 120px;
+    max-height: 120px;
+    height: 120px;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.80);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    padding: 0;
+    opacity: 0;
+    transition: opacity .5s;
+}
+.profile__avatar-imgEdit:hover {
+    opacity: 1;
+}
