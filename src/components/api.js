@@ -1,27 +1,22 @@
+import {checkResponse} from "./utils";
 
 
-export const config = {
+const config = {
   baseUrl: 'https://mesto.nomoreparties.co/v1/wbf-cohort-11',
   headers: {
     authorization: '583bab91-7255-47af-95fa-3ce7d6743919',
     'Content-Type': 'application/json'
   },
-  id: 'dd65714e3d1da631ddfc20a8'
+
 }
 export const getUser = () => {
-  return fetch(`${config.baseUrl}/users/me`, {
-    headers: {
-      authorization: config.headers.authorization
-    }
+  return checkRequest(`/users/me`, {
+    headers: config.headers
   })
 }
-
 export const editUser = (name, about) => {
-    return fetch(`${config.baseUrl}/users/me`, {
-      headers: {
-        authorization: config.headers.authorization,
-        'Content-Type': 'application/json'
-      },
+    return checkRequest(`/users/me`, {
+      headers: config.headers,
       method: 'PATCH',
       body: JSON.stringify({
         name: name,
@@ -29,22 +24,14 @@ export const editUser = (name, about) => {
       })
     })
   }
-
 export const getCards = () => {
-  return fetch(`${config.baseUrl}/cards`, {
-    headers: {
-      authorization: config.headers.authorization,
-      'Content-Type': 'application/json'
-    }
+  return checkRequest(`/cards`, {
+    headers: config.headers
   })
 };
-
 export const createNewCard = (place, link) => {
-  return fetch(`${config.baseUrl}/cards`, {
-    headers: {
-      authorization: config.headers.authorization,
-      'Content-Type': 'application/json'
-    },
+  return checkRequest(`/cards`, {
+    headers: config.headers,
     method: 'POST',
     body: JSON.stringify({
       name: place,
@@ -53,39 +40,34 @@ export const createNewCard = (place, link) => {
   })
 }
 export const deleteCard = (id) => {
-  return fetch(`${config.baseUrl}/cards/${id}`, {
-    headers: {
-      authorization: config.headers.authorization,
-    },
+  return checkRequest(`/cards/${id}`, {
+    headers: config.headers,
     method: 'DELETE',
   })
 }
 export const addLike = (cardId) => {
-  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
-    headers: {
-      authorization: config.headers.authorization,
-    },
+  return checkRequest(`/cards/likes/${cardId}`, {
+    headers: config.headers,
     method: 'PUT',
   })
 }
 export const deleteLike = (cardId) => {
-  return fetch (`${config.baseUrl}/cards/likes/${cardId}`, {
-    headers: {
-      authorization: config.headers.authorization,
-    },
+  return checkRequest (`/cards/likes/${cardId}`, {
+    headers: config.headers,
     method: 'DELETE',
   })
 }
 export const updateAvatar = (link) => {
-  return fetch(`${config.baseUrl}/users/me/avatar`, {
-    headers: {
-      authorization: config.headers.authorization,
-      'Content-Type': 'application/json'
-    },
+return checkRequest('/users/me/avatar', {
+    headers: config.headers,
     method: 'PATCH',
     body: JSON.stringify({
       avatar: link
     })
-  })
+})
 }
-// https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg?auto=compress&cs=tinysrgb&w=1600
+
+const checkRequest = (endpoint, options) => {
+  console.log()
+  return fetch(config.baseUrl + endpoint, options).then(res => checkResponse(res));
+}

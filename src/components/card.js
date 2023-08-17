@@ -1,28 +1,18 @@
 import {openPopup, closePopup} from "./modal";
 import {
   cardTemplate, deleteCardPopup,
-  elementsSection, formCardDelete,
+  formCardDelete,
   galleryPopup,
   galleryPopupImg,
   galleryPopupImgDescription,
 } from "./constants";
-import {addLike, config, deleteCard, deleteLike, getCards} from "./api";
+import {addLike, deleteCard, deleteLike} from "./api";
 import trashSymbol from '../images/trash.svg';
-export const renderCards = () => {
-  getCards()
-    .then(res => {
-      if(res.ok) {
-        return res.json()
-      }
-    })
-    .then((data) => data)
-    .then(res => {
-      res.forEach(item => {
-        elementsSection.append(createCard(item.name, item.link, item.owner._id, item._id, item.likes));
-      })
-    })
-    .catch(res =>  Promise.reject(`Ошибка: ${res.status}`))
-}
+import {userId} from "./profile";
+
+let cardToDelete;
+let cardNumberId;
+
 export const createCard = (name, link, ownerId, cardId, likesArray) => {
   const card = cardTemplate.cloneNode(true);
   const cardImage = card.querySelector('.card__image');
@@ -30,6 +20,7 @@ export const createCard = (name, link, ownerId, cardId, likesArray) => {
   likes.textContent = likesArray.length;
   cardImage.src = link;
   cardImage.alt = name;
+
   cardImage.addEventListener('click', () => {
     openPopup(galleryPopup);
     galleryPopupImg.src = link;
@@ -37,18 +28,13 @@ export const createCard = (name, link, ownerId, cardId, likesArray) => {
     galleryPopupImgDescription.textContent = name;
   })
   card.querySelector('.card__header').textContent = name;
-  if(ownerId === config.id) {
+  if(ownerId === userId) {
     const deleteSymbol = card.querySelector('.card__delete-symbol');
     deleteSymbol.innerHTML = `<img src=${trashSymbol} alt="Кнопка удаления">`;
     deleteSymbol.addEventListener('click', () => {
       openPopup(deleteCardPopup);
-      formCardDelete.addEventListener('submit', (e) => {
-        e.preventDefault();
-        deleteCard(cardId)
-          .catch(res =>  Promise.reject(`Ошибка: ${res.status}`));
-        card.remove();
-        closePopup(deleteCardPopup);
-      })
+      cardToDelete = card;
+      cardNumberId = cardId;
     });
   }
   const likeButton = card.querySelector('.card__like-symbol');
@@ -59,22 +45,22 @@ export const createCard = (name, link, ownerId, cardId, likesArray) => {
     likeButton.classList.toggle('active');
     if(likeButton.classList.contains('active')) {
       addLike(cardId)
-        .then(res => {
-          if(res.ok) {
-            return res.json();
-          }
-        })
-        .then(res => likes.textContent = res.likes.length);
+        .then(res => likes.textContent = res.likes.length)
+        .catch(console.error);
     } else {
       deleteLike(cardId)
-        .then(res => {
-          if(res.ok) {
-            return res.json();
-          }
-        })
         .then(res => likes.textContent = res.likes.length)
-        .catch(res =>  Promise.reject(`Ошибка: ${res.status}`))
+        .catch(console.error);
     }
   });
   return card;
 }
+formCardDelete.addEventListener('submit', (e) => {
+  e.preventDefault();
+  deleteCard(cardNumberId)
+    .then(() => {
+      cardToDelete.remove()
+      closePopup(deleteCardPopup);
+    })
+    .catch(console.error);
+})

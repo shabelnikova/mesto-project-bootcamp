@@ -1,5 +1,5 @@
 import './pages/index.css';
-import {createCard, renderCards} from "./components/card";
+import {createCard} from "./components/card";
 import {enableValidation} from "./components/validate";
 import {closePopup, openPopup} from "./components/modal";
 import {
@@ -23,9 +23,17 @@ import {
   avatarInputLink,
   avatarImg,
 } from "./components/constants";
-import {createUser} from "./components/profile";
-import {createNewCard, editUser, updateAvatar} from "./components/api";
+import {createProfile} from "./components/profile";
+import {createNewCard, editUser, getCards, getUser, updateAvatar} from "./components/api";
 
+Promise.all([getUser(), getCards()])
+  .then(([userData, cards]) => {
+    createProfile(userData);
+    cards.forEach(item => {
+      elementsSection.append(createCard(item.name, item.link, item.owner._id, item._id, item.likes));
+    })
+  })
+  .catch(console.error);
 
 enableValidation({
   formSelector: '.form',
@@ -35,9 +43,12 @@ enableValidation({
   inputErrorClass: 'form__item_type_error',
   errorClass: 'form__item_error'
 });
-
-renderCards();
-
+const renderLoading = (isLoading, button, buttonText = 'Сохранить', loadingText = 'Сохранение...') => {
+  if(isLoading)
+    button.textContent = loadingText;
+  else
+    button.textContent = buttonText;
+}
 addBtn.addEventListener('click', () => {
   openPopup(popupBlockAdd);
 });
@@ -52,66 +63,49 @@ avatarEdit.addEventListener('click', () => {
 })
 formEdit.addEventListener('submit', (e) => {
   e.preventDefault();
-  e.submitter.textContent = 'Сохранение...'
+  renderLoading(true, e.submitter);
   editUser(nameInput.value, jobInput.value)
-    .then(res => {
-      if(res.ok) {
-        return res.json();
-      }
-    })
     .then(res => {
       userName.textContent = res.name;
       userAbout.textContent = res.about;
+      e.submitter.classList.add('form__button_inactive');
+      e.submitter.setAttribute('disabled', '');
+      closePopup(popupBlockEdit);
     })
-    .catch(res =>  Promise.reject(`Ошибка: ${res.status}`))
-  e.submitter.classList.add('form__button_inactive');
-  e.submitter.setAttribute('disabled', '');
-  console.log(e)
-  closePopup(popupBlockEdit);
-  e.submitter.textContent = 'Сохранить'
+    .catch(console.error)
+    .finally(() => renderLoading(false, e.submitter))
 });
 formAdd.addEventListener('submit', (e) => {
   e.preventDefault();
-  e.submitter.textContent = 'Сохранение...';
+  renderLoading(true, e.submitter);
   createNewCard(placeInput.value, imgInput.value)
     .then(res => {
-      if(res.ok) {
-        return res.json();
-      }
-    })
-    .then(res => {
       elementsSection.prepend(createCard(res.name, res.link, res.owner._id, res._id, res.likes));
-      console.log(res)
+      e.submitter.classList.add('form__button_inactive');
+      e.submitter.setAttribute('disabled', '');
+      closePopup(popupBlockAdd);
+      formAdd.reset();
     })
-    .catch(res =>  Promise.reject(`Ошибка: ${res.status}`))
-  formAdd.reset();
-  e.submitter.classList.add('form__button_inactive');
-  e.submitter.setAttribute('disabled', '');
-  closePopup(popupBlockAdd);
-  e.submitter.textContent = 'Создать'
+    .catch(console.error)
+    .finally(() => renderLoading(false, e.submitter, 'Создать'))
+
 });
 formEditAvatar.addEventListener('submit', (e) => {
   e.preventDefault();
-  e.submitter.textContent = 'Сохранение...'
+  renderLoading(true, e.submitter);
   updateAvatar(avatarInputLink.value)
     .then(res => {
-      if(res.ok) {
-        return res.json();
-      }
-    })
-    .then(res => {
-      avatarImg.src = res.avatar;
       console.log(res)
+      avatarImg.src = res.avatar;
       avatarImg.alt = userName.textContent;
+      closePopup(popupBlockAvatarEdit);
+      e.submitter.classList.add('form__button_inactive');
+      e.submitter.setAttribute('disabled', '');
+      formEditAvatar.reset();
     })
-    .catch(res =>  Promise.reject(`Ошибка: ${res.status}`))
-  closePopup(popupBlockAvatarEdit);
-  formEditAvatar.reset();
-  e.submitter.classList.add('form__button_inactive');
-  e.submitter.setAttribute('disabled', '');
-  e.submitter.textContent = 'Сохранить';
+    .catch(console.error)
+    .finally(() => renderLoading(false, e.submitter))
 })
-
 popups.forEach(item => {
   item.addEventListener('mousedown', (e) => {
     if(e.currentTarget === e.target || e.target.classList.contains('popup__closing')) {
@@ -119,5 +113,4 @@ popups.forEach(item => {
     }
   });
 })
-createUser()
-  .catch(res =>  Promise.reject(`Ошибка: ${res.status}`))
+

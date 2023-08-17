@@ -1,5 +1,4 @@
 
-
 export const elementsSection = document.querySelector('.elements');
 export const cardTemplate = document.querySelector('#card-template').content.querySelector('.card');
 export const galleryPopup = document.querySelector('#photoPopup');
