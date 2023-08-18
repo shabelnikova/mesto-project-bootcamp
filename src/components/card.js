@@ -42,14 +42,15 @@ export const createCard = (name, link, ownerId, cardId, likesArray) => {
     likeButton.classList.add('active');
   }
   likeButton.addEventListener('click', () => {
-    likeButton.classList.toggle('active');
-    if(likeButton.classList.contains('active')) {
+    if(!likeButton.classList.contains('active')) {
       addLike(cardId)
         .then(res => likes.textContent = res.likes.length)
+        .then(res => likeButton.classList.add('active'))
         .catch(console.error);
     } else {
       deleteLike(cardId)
         .then(res => likes.textContent = res.likes.length)
+        .then(res => likeButton.classList.remove('active'))
         .catch(console.error);
     }
   });
