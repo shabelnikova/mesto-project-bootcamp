@@ -38,7 +38,7 @@ export const createCard = (name, link, ownerId, cardId, likesArray) => {
     });
   }
   const likeButton = card.querySelector('.card__like-symbol');
-  if(likesArray.find(el => el._id === ownerId)) {
+  if(likesArray.find(el => el._id === userId)) {
     likeButton.classList.add('active');
   }
   likeButton.addEventListener('click', () => {
